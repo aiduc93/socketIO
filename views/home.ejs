@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Socket</title>
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src="socket.io/socket.io.js"></script>
+
+	<script>
+		var socket = io('http://localhost:3000');
+		
+		//This function will recieve mess from server and show it to client-side for 3 cases
+		socket.on('Server-send-data', function(data) {
+			$('.result').append(data + '<br/>');
+		});
+
+		$(document).ready(function() {
+			$('.btnSend').click(function(){
+				socket.emit('Client-send-data', $('.message').val());
+			});
+		});
+	</script>
+</head>
+<body>
+Socket.io
+<div class='content'>
+	<input type='text' class='message'></div>
+	<button class='btnSend' name='Click send' type="button" >Click send</button>
+	<p>Result:</p>
+	<div class='result'></div>
+</div>
+</body>
+</html>
